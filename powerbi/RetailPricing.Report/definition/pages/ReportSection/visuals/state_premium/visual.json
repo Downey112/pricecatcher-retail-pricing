@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "state_premium",
   "position": {
-    "x": 320,
-    "y": 376,
+    "x": 772.8,
+    "y": 212,
     "z": 21000,
-    "height": 328,
-    "width": 320,
+    "height": 484,
+    "width": 483.2,
     "tabOrder": 21000
   },
   "visual": {
@@ -89,6 +89,19 @@
                     }
                   },
                   "Property": "Title State"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bar chart of the price premium against the typical shop for each state, sorted from cheapest to dearest.'"
                 }
               }
             }

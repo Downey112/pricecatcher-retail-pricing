@@ -122,8 +122,9 @@ reads the parquet files in the folder named by the `ProcessedFolder` parameter; 
 project lives somewhere else on your machine, change it under **Transform data > Edit
 parameters**.
 
-- **Three tiers on one page:** five KPI tiles, the monthly index by format, then ranked
-  bars and the item table for detail.
+- **Three tiers on one page:** five KPI tiles, then the format and state comparisons with
+  the monthly index, then the item table for detail. Every visual sits on one five-column
+  grid with 24 px margins and 16 px gaps, and carries alt text.
 - **33 DAX measures** in display folders: base counts, benchmark (index, premium, P90/P10
   spread), repricing, format ranking, card text and dynamic titles.
 - **Slicers** for item group and state. The benchmark stays national when a state is

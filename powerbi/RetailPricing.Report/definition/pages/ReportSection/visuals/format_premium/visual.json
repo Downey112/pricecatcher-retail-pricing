@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "format_premium",
   "position": {
-    "x": 24,
-    "y": 376,
+    "x": 24.0,
+    "y": 212,
     "z": 20000,
-    "height": 328,
-    "width": 280,
+    "height": 176,
+    "width": 233.6,
     "tabOrder": 20000
   },
   "visual": {
@@ -89,6 +89,19 @@
                     }
                   },
                   "Property": "Title Format"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Bar chart of the price premium against the typical shop for each store format, sorted from cheapest to dearest.'"
                 }
               }
             }

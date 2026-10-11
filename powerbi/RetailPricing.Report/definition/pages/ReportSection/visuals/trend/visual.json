@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "trend",
   "position": {
-    "x": 24,
-    "y": 192,
+    "x": 273.6,
+    "y": 212,
     "z": 19000,
-    "height": 168,
-    "width": 1232,
+    "height": 176,
+    "width": 483.2,
     "tabOrder": 19000
   },
   "visual": {
@@ -90,6 +90,19 @@
                     }
                   },
                   "Property": "Title Trend"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Line chart of the monthly price index for each of five store formats, where 100 is the typical shop price for the same item in the same month.'"
                 }
               }
             }

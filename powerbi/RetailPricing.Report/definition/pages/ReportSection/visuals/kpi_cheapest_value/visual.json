@@ -3,7 +3,7 @@
   "name": "kpi_cheapest_value",
   "position": {
     "x": 273.6,
-    "y": 76,
+    "y": 96,
     "z": 8000,
     "height": 74,
     "width": 233.6,
@@ -125,6 +125,19 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'The store format with the lowest prices against the typical shop.'"
                 }
               }
             }
