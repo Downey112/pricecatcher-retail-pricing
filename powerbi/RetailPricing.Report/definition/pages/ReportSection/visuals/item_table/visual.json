@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "item_table",
   "position": {
-    "x": 656,
-    "y": 376,
+    "x": 24.0,
+    "y": 404,
     "z": 22000,
-    "height": 328,
-    "width": 600,
+    "height": 292,
+    "width": 732.8,
     "tabOrder": 22000
   },
   "visual": {
@@ -136,6 +136,19 @@
             }
           }
         }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table of items ranked by price spread, the percentage a dear shop charges over a cheap shop for the same item, with unit, typical price and number of shops.'"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "objects": {
@@ -158,7 +171,7 @@
             "value": {
               "expr": {
                 "Literal": {
-                  "Value": "300D"
+                  "Value": "400D"
                 }
               }
             }

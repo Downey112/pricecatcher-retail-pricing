@@ -3,7 +3,7 @@
   "name": "kpi_shops_value",
   "position": {
     "x": 24.0,
-    "y": 76,
+    "y": 96,
     "z": 5000,
     "height": 74,
     "width": 233.6,
@@ -125,6 +125,19 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Number of shops surveyed.'"
                 }
               }
             }

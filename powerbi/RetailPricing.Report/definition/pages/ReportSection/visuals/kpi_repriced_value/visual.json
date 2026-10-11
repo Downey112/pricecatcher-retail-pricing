@@ -3,7 +3,7 @@
   "name": "kpi_repriced_value",
   "position": {
     "x": 1022.4,
-    "y": 76,
+    "y": 96,
     "z": 17000,
     "height": 74,
     "width": 233.6,
@@ -125,6 +125,19 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Share of shop and item prices that changed from the previous month.'"
                 }
               }
             }

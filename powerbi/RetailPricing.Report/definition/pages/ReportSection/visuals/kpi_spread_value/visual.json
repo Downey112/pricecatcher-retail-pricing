@@ -3,7 +3,7 @@
   "name": "kpi_spread_value",
   "position": {
     "x": 772.8,
-    "y": 76,
+    "y": 96,
     "z": 14000,
     "height": 74,
     "width": 233.6,
@@ -125,6 +125,19 @@
               "expr": {
                 "Literal": {
                   "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "altText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Price spread: what a dear shop charges over a cheap shop for the same item.'"
                 }
               }
             }

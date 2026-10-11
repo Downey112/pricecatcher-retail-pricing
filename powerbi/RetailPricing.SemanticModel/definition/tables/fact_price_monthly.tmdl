@@ -210,7 +210,7 @@ table fact_price_monthly
 		displayFolder: Titles
 		lineageTag: 77d53a0c-4425-4b4d-aa29-08eb6a140fe0
 
-	measure 'Title Trend' = "Price index by store format (100 = typical shop)  ·  " & [Selection Label]
+	measure 'Title Trend' = "Price index, 100 = typical shop  ·  " & [Selection Label]
 		displayFolder: Titles
 		lineageTag: 8881527f-3ca2-4852-a0e6-009935588eba
 
