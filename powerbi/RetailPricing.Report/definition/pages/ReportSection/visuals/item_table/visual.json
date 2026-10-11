@@ -1,0 +1,230 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "item_table",
+  "position": {
+    "x": 656,
+    "y": 376,
+    "z": 22000,
+    "height": 328,
+    "width": 600,
+    "tabOrder": 22000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_item"
+                    }
+                  },
+                  "Property": "item"
+                }
+              },
+              "queryRef": "dim_item.item",
+              "nativeQueryRef": "item",
+              "displayName": "Item"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_item"
+                    }
+                  },
+                  "Property": "unit"
+                }
+              },
+              "queryRef": "dim_item.unit",
+              "nativeQueryRef": "unit",
+              "displayName": "Unit"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_price_monthly"
+                    }
+                  },
+                  "Property": "Typical Price (RM)"
+                }
+              },
+              "queryRef": "fact_price_monthly.Typical Price (RM)",
+              "nativeQueryRef": "Typical Price (RM)",
+              "displayName": "Typical RM"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_price_monthly"
+                    }
+                  },
+                  "Property": "Price Spread %"
+                }
+              },
+              "queryRef": "fact_price_monthly.Price Spread %",
+              "nativeQueryRef": "Price Spread %",
+              "displayName": "Spread"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_price_monthly"
+                    }
+                  },
+                  "Property": "Shops"
+                }
+              },
+              "queryRef": "fact_price_monthly.Shops",
+              "nativeQueryRef": "Shops",
+              "displayName": "Shops"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_price_monthly"
+                  }
+                },
+                "Property": "Price Spread %"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_price_monthly"
+                    }
+                  },
+                  "Property": "Title Items"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "300D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_item.item"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "56D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_item.unit"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "76D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_price_monthly.Typical Price (RM)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "60D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_price_monthly.Price Spread %"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "56D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "fact_price_monthly.Shops"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

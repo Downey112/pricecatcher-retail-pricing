@@ -1,0 +1,48 @@
+table dim_month
+	lineageTag: 3b6bf175-59b8-4ec6-bea4-36215eaed9ac
+
+	column month
+		dataType: dateTime
+		isKey
+		formatString: mmm yyyy
+		lineageTag: 12571e3d-0453-4b62-8516-f3ddd57c3dbf
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column month_label
+		dataType: string
+		lineageTag: d2820df3-d6f5-495d-ad0b-ca72e27ab31d
+		summarizeBy: none
+		sourceColumn: month_label
+		sortByColumn: month_index
+
+	column month_index
+		dataType: int64
+		isHidden
+		lineageTag: 5a1184b9-760d-47a6-8fcf-7263faae6872
+		summarizeBy: none
+		sourceColumn: month_index
+
+	column days_surveyed
+		dataType: int64
+		lineageTag: ac11bba0-ff44-4bb9-8f11-97c4d92b7563
+		summarizeBy: none
+		sourceColumn: days_surveyed
+
+	partition dim_month = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(ProcessedFolder & "\dim_month.parquet")),
+				    #"Selected" = Table.SelectColumns(Source, {"month", "month_label", "month_index", "days_surveyed"}),
+				    #"Typed" = Table.TransformColumnTypes(#"Selected", {
+				        {"month", type date},
+				        {"month_label", type text},
+				        {"month_index", Int64.Type},
+				        {"days_surveyed", Int64.Type}
+				    })
+				in
+				    #"Typed"
+

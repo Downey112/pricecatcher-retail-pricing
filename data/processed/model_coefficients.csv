@@ -1,0 +1,20 @@
+factor,term,premium_pct,ci_low_pct,ci_high_pct,std_error_log,p_value,baseline
+format,Hypermarket,-2.09,-3.23,-0.94,0.00595,0.0004,Supermarket
+format,Mini market,4.68,3.92,5.44,0.00369,0.0,Supermarket
+format,Sundry shop,7.56,6.63,8.51,0.00445,0.0,Supermarket
+format,Wet market,9.56,8.41,10.71,0.00535,0.0,Supermarket
+state,Johor,-0.27,-1.92,1.41,0.00852,0.7524,Selangor
+state,Kedah,-3.49,-5.11,-1.84,0.00865,0.0,Selangor
+state,Kelantan,-1.26,-2.72,0.23,0.00761,0.0967,Selangor
+state,Melaka,-2.01,-4.57,0.61,0.01346,0.1308,Selangor
+state,Negeri Sembilan,-1.46,-3.58,0.71,0.01111,0.1862,Selangor
+state,Pahang,-0.85,-2.38,0.7,0.00791,0.2791,Selangor
+state,Perak,-4.04,-5.62,-2.42,0.0085,0.0,Selangor
+state,Perlis,-0.01,-2.45,2.48,0.01257,0.9907,Selangor
+state,Pulau Pinang,-2.09,-3.81,-0.34,0.00905,0.0197,Selangor
+state,Sabah,6.88,5.3,8.48,0.0076,0.0,Selangor
+state,Sarawak,6.0,4.44,7.59,0.00759,0.0,Selangor
+state,Terengganu,-0.43,-2.01,1.18,0.00818,0.6009,Selangor
+state,W.P. Kuala Lumpur,5.63,3.59,7.71,0.00995,0.0,Selangor
+state,W.P. Labuan,9.02,6.95,11.14,0.00981,0.0,Selangor
+state,W.P. Putrajaya,6.3,2.77,9.95,0.01725,0.0004,Selangor

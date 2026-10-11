@@ -1,0 +1,299 @@
+table fact_price_monthly
+	lineageTag: c7723169-0d5c-4655-8694-abbafe922b6d
+
+	measure 'Shops' = DISTINCTCOUNT(fact_price_monthly[premise_code])
+		formatString: #,0
+		displayFolder: Base
+		lineageTag: e1baeb2d-5bb2-47e9-8f6e-494afb7d8477
+
+	measure 'Items' = DISTINCTCOUNT(fact_price_monthly[item_code])
+		formatString: #,0
+		displayFolder: Base
+		lineageTag: 525f3a8b-1e2d-4d17-a0e8-28d534023b19
+
+	measure 'Monthly Prices' = COUNTROWS(fact_price_monthly)
+		formatString: #,0
+		displayFolder: Base
+		lineageTag: 8e2bac07-36ec-4305-8e80-43b40cfa3da3
+
+	measure 'Typical Price (RM)' =
+			-- Geometric mean, so one very dear shop cannot drag the figure up
+			IF(
+			    NOT ISEMPTY(fact_price_monthly),
+			    EXP(AVERAGEX(fact_price_monthly, LN(fact_price_monthly[price])))
+			)
+		formatString: #,0.00
+		displayFolder: Base
+		lineageTag: 7e968ee7-7b5a-404b-8351-96fbc6abf2c3
+
+	measure 'Price Index' =
+			-- 100 = the typical shop's price for the same item in the same month
+			IF(
+			    NOT ISEMPTY(fact_price_monthly),
+			    100 * EXP(AVERAGE(fact_price_monthly[log_price_gap]))
+			)
+		formatString: 0.0
+		displayFolder: Benchmark
+		lineageTag: f721c5bd-3fba-4716-b515-96305277a884
+
+	measure 'Premium %' =
+			IF(
+			    NOT ISEMPTY(fact_price_monthly),
+			    EXP(AVERAGE(fact_price_monthly[log_price_gap])) - 1
+			)
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: Benchmark
+		lineageTag: ece70322-0799-4935-a08a-860743601f3c
+
+	measure 'Price Spread %' =
+			-- What a dear shop (90th percentile) charges over a cheap one (10th) for the same item
+			VAR Dear = PERCENTILE.INC(fact_price_monthly[log_price_gap], 0.9)
+			VAR Cheap = PERCENTILE.INC(fact_price_monthly[log_price_gap], 0.1)
+			RETURN
+			    IF(
+			        NOT ISEMPTY(fact_price_monthly),
+			        EXP(Dear - Cheap) - 1
+			    )
+		formatString: 0.0%
+		displayFolder: Benchmark
+		lineageTag: 22e16d6d-b835-4a8b-bf9b-2bb3a71d759b
+
+	measure 'Comparable Pairs' = COUNT(fact_price_monthly[price_previous_month])
+		formatString: #,0
+		displayFolder: Repricing
+		lineageTag: fd5a8312-c7f6-4c04-9e6e-9c0624ed7a1e
+
+	measure 'Repriced Pairs' =
+			COUNTROWS(
+			    FILTER(
+			        fact_price_monthly,
+			        NOT ISBLANK(fact_price_monthly[price_previous_month])
+			            && fact_price_monthly[price] <> fact_price_monthly[price_previous_month]
+			    )
+			)
+		formatString: #,0
+		displayFolder: Repricing
+		lineageTag: bf193160-6c1f-45c5-b09c-13137a7d07a9
+
+	measure 'Repriced %' = DIVIDE([Repriced Pairs], [Comparable Pairs])
+		formatString: 0.0%
+		displayFolder: Repricing
+		lineageTag: 31aa8c3c-f6ea-40c8-b966-2b98ab0b54e0
+
+	measure 'Cheapest Format' =
+			VAR Formats =
+			    FILTER(
+			        ADDCOLUMNS(VALUES(dim_premise[store_format]), "@Premium", [Premium %]),
+			        NOT ISBLANK([@Premium])
+			    )
+			RETURN
+			    MINX(TOPN(1, Formats, [@Premium], ASC), dim_premise[store_format])
+		displayFolder: Format Ranking
+		lineageTag: f1099db1-0c90-4c25-afcc-43a7839ab000
+
+	measure 'Cheapest Format Premium %' =
+			MINX(
+			    VALUES(dim_premise[store_format]),
+			    [Premium %]
+			)
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: Format Ranking
+		lineageTag: fe0474b3-783c-4509-9b1d-3a39c5f87da4
+
+	measure 'Dearest Format' =
+			VAR Formats =
+			    FILTER(
+			        ADDCOLUMNS(VALUES(dim_premise[store_format]), "@Premium", [Premium %]),
+			        NOT ISBLANK([@Premium])
+			    )
+			RETURN
+			    MAXX(TOPN(1, Formats, [@Premium], DESC), dim_premise[store_format])
+		displayFolder: Format Ranking
+		lineageTag: e080dec6-970b-4eae-a3af-2a6d44f12f52
+
+	measure 'Dearest Format Premium %' =
+			MAXX(
+			    VALUES(dim_premise[store_format]),
+			    [Premium %]
+			)
+		formatString: +0.0%;-0.0%;0.0%
+		displayFolder: Format Ranking
+		lineageTag: 18361341-4548-41d7-93df-f62a29b1fd18
+
+	measure 'Format Gap %' =
+			-- How much more the dearest format charges than the cheapest
+			VAR Cheap = [Cheapest Format Premium %]
+			VAR Dear = [Dearest Format Premium %]
+			RETURN
+			    IF(
+			        NOT ISBLANK(Cheap) && NOT ISBLANK(Dear),
+			        DIVIDE(1 + Dear, 1 + Cheap) - 1
+			    )
+		formatString: 0.0%
+		displayFolder: Format Ranking
+		lineageTag: 0ed538bf-14a8-428c-920c-14f9f006c681
+
+	measure 'Card Shops' = FORMAT([Shops], "#,0")
+		displayFolder: Cards
+		lineageTag: 1d9b8053-ce0a-4061-a2f9-12414a49a297
+
+	measure 'Label Shops' = FORMAT([Items], "#,0") & " items  ·  " & FORMAT([Monthly Prices], "#,0") & " monthly prices"
+		displayFolder: Cards
+		lineageTag: 416389d1-8803-44df-b60f-65f43855bebc
+
+	measure 'Card Spread' = IF(NOT ISBLANK([Price Spread %]), FORMAT([Price Spread %], "0%"))
+		displayFolder: Cards
+		lineageTag: 090a5e40-32d2-4d16-8f5d-001cb04729cf
+
+	measure 'Label Spread' = "dear vs cheap shop, same item"
+		displayFolder: Cards
+		lineageTag: 34dad26a-b75d-4db7-86b8-b5bb10900c61
+
+	measure 'Card Repriced' = IF(NOT ISBLANK([Repriced %]), FORMAT([Repriced %], "0%"))
+		displayFolder: Cards
+		lineageTag: b39b0879-ad70-4c54-ad13-009a93ffb464
+
+	measure 'Label Repriced' = "of prices moved month to month"
+		displayFolder: Cards
+		lineageTag: 309e91ce-2005-472c-91db-0eeaba484ba7
+
+	measure 'Label Cheapest Format' =
+			VAR Premium = [Cheapest Format Premium %]
+			RETURN
+			    IF(
+			        NOT ISBLANK(Premium),
+			        FORMAT(ABS(Premium), "0.0%") & IF(Premium < 0, " below", " above") & " the typical shop"
+			    )
+		displayFolder: Cards
+		lineageTag: e3f77999-2c0c-49b9-85ad-0bb6742e07c9
+
+	measure 'Label Dearest Format' =
+			VAR Premium = [Dearest Format Premium %]
+			RETURN
+			    IF(
+			        NOT ISBLANK(Premium),
+			        FORMAT(ABS(Premium), "0.0%") & IF(Premium < 0, " below", " above") & " the typical shop"
+			    )
+		displayFolder: Cards
+		lineageTag: bb854f24-6129-4850-88b4-becd3e929307
+
+	measure 'Color Premium' =
+			-- Blue marks prices below the typical shop; grey marks prices above it
+			IF([Premium %] < 0, "#2A78D6", "#94A3B8")
+		displayFolder: Formatting
+		lineageTag: fa447283-609e-4421-9c53-cf3f9c714f20
+
+	measure 'Selection Label' =
+			SELECTEDVALUE(dim_item[item_group], "All items")
+			    & "  ·  "
+			    & SELECTEDVALUE(dim_premise[state], "Malaysia")
+		displayFolder: Titles
+		lineageTag: b1927a46-7aa7-45f0-976b-a5cc46548cba
+
+	measure 'Title Shops' = "Shops surveyed"
+		displayFolder: Titles
+		lineageTag: d38662c9-efe8-47c6-a02d-b627c9e82e6e
+
+	measure 'Title Cheapest Format' = "Cheapest store format"
+		displayFolder: Titles
+		lineageTag: 26623cc4-4c87-4615-8013-f0e5ee8d4ffd
+
+	measure 'Title Dearest Format' = "Dearest store format"
+		displayFolder: Titles
+		lineageTag: 03c0f475-ec6a-4dfc-a82f-3c6160eda7e1
+
+	measure 'Title Spread' = "Price spread"
+		displayFolder: Titles
+		lineageTag: 55619461-65d7-42df-842e-53e480b5932d
+
+	measure 'Title Repriced' = "Repriced each month"
+		displayFolder: Titles
+		lineageTag: 77d53a0c-4425-4b4d-aa29-08eb6a140fe0
+
+	measure 'Title Trend' = "Price index by store format (100 = typical shop)  ·  " & [Selection Label]
+		displayFolder: Titles
+		lineageTag: 8881527f-3ca2-4852-a0e6-009935588eba
+
+	measure 'Title Format' = "Premium by store format"
+		displayFolder: Titles
+		lineageTag: 68c6e9a1-64e1-4308-842f-80dbb10416df
+
+	measure 'Title State' = "Premium by state"
+		displayFolder: Titles
+		lineageTag: 34eabcc0-e95a-4a86-b981-50987df69e37
+
+	measure 'Title Items' = "Where the shop matters most: items ranked by price spread"
+		displayFolder: Titles
+		lineageTag: a6362afa-5060-49d5-b8ce-6d1bb5b37164
+
+	column month
+		dataType: dateTime
+		isHidden
+		formatString: mmm yyyy
+		lineageTag: 34a8a8c4-fe68-4614-925d-69f170a562a1
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column premise_code
+		dataType: int64
+		isHidden
+		lineageTag: 02316842-fa38-4aec-b5b7-0e743ba47b6e
+		summarizeBy: none
+		sourceColumn: premise_code
+
+	column item_code
+		dataType: int64
+		isHidden
+		lineageTag: a99e2c7a-36ee-432f-bcb6-6ed914a82ebe
+		summarizeBy: none
+		sourceColumn: item_code
+
+	column price
+		dataType: double
+		formatString: #,0.00
+		lineageTag: 0d8eb922-900f-4c56-a21f-9b136cc9ef49
+		summarizeBy: none
+		sourceColumn: price
+
+	column price_previous_month
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		lineageTag: 8457f83a-4d38-4c82-86a2-f85bd87e4698
+		summarizeBy: none
+		sourceColumn: price_previous_month
+
+	column log_price_gap
+		dataType: double
+		isHidden
+		lineageTag: bffc9fdb-f748-4233-85c0-029ea8d79088
+		summarizeBy: none
+		sourceColumn: log_price_gap
+
+	column days_observed
+		dataType: int64
+		isHidden
+		lineageTag: a673cf6f-ab2b-45dd-a713-fa4b77f15b7e
+		summarizeBy: none
+		sourceColumn: days_observed
+
+	partition fact_price_monthly = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(ProcessedFolder & "\fact_price_monthly.parquet")),
+				    #"Selected" = Table.SelectColumns(Source, {"month", "premise_code", "item_code", "price", "price_previous_month", "log_price_gap", "days_observed"}),
+				    #"Typed" = Table.TransformColumnTypes(#"Selected", {
+				        {"month", type date},
+				        {"premise_code", Int64.Type},
+				        {"item_code", Int64.Type},
+				        {"price", type number},
+				        {"price_previous_month", type number},
+				        {"log_price_gap", type number},
+				        {"days_observed", Int64.Type}
+				    })
+				in
+				    #"Typed"
+

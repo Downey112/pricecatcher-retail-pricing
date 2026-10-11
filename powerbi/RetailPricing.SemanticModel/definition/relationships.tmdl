@@ -1,0 +1,12 @@
+relationship price_month
+	fromColumn: fact_price_monthly.month
+	toColumn: dim_month.month
+
+relationship price_item
+	fromColumn: fact_price_monthly.item_code
+	toColumn: dim_item.item_code
+
+relationship price_premise
+	fromColumn: fact_price_monthly.premise_code
+	toColumn: dim_premise.premise_code
+

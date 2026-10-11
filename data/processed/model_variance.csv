@@ -1,0 +1,6 @@
+source,share_of_variance,share_pct
+Store format alone,0.0254,2.5
+State alone,0.0319,3.2
+Store format and state together,0.0633,6.3
+"The individual shop, beyond its format and state",0.1256,12.6
+"The residual: same shop, different item or month",0.8111,81.1

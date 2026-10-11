@@ -1,0 +1,23 @@
+cut,member,items_priced,basket_cost,vs_malaysia_rm
+State,Sarawak,16,127.02,7.5
+State,Perlis,16,117.53,-1.99
+Store format,Hypermarket,16,110.96,-8.57
+State,Kedah,16,113.18,-6.35
+Store format,Mini market,16,120.23,0.7
+State,Johor,16,120.09,0.56
+State,W.P. Labuan,16,128.11,8.58
+Store format,Sundry shop,16,125.83,6.3
+State,Terengganu,16,123.28,3.76
+State,Negeri Sembilan,16,120.47,0.94
+State,Melaka,16,121.09,1.57
+Store format,Wet market,16,126.58,7.06
+State,Perak,16,112.77,-6.75
+State,Kelantan,16,119.79,0.27
+State,Selangor,16,120.8,1.27
+State,Pulau Pinang,16,116.56,-2.97
+State,Sabah,16,125.91,6.38
+Store format,Supermarket,16,116.21,-3.32
+State,Pahang,16,121.44,1.91
+State,W.P. Kuala Lumpur,16,123.76,4.24
+State,W.P. Putrajaya,16,128.47,8.94
+Malaysia,Malaysia,16,119.52,0.0

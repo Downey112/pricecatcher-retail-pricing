@@ -1,0 +1,5 @@
+expression ProcessedFolder = "C:\\Users\\courts\\pricecatcher-retail-pricing\\data\\processed" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: dc3eb91a-20f5-4e37-8d8f-78e30b087626
+
+	annotation PBI_ResultType = Text
+

@@ -1,0 +1,51 @@
+table dim_item
+	lineageTag: 372a0d52-fd8a-4264-81cf-92c8f1ff5a4b
+
+	column item_code
+		dataType: int64
+		isKey
+		isHidden
+		lineageTag: 0eda8b33-c3ec-4541-861d-e9e9ad36e3f7
+		summarizeBy: none
+		sourceColumn: item_code
+
+	column item
+		dataType: string
+		lineageTag: afa4df4c-7f24-4efb-a136-4af1621d4145
+		summarizeBy: none
+		sourceColumn: item
+
+	column unit
+		dataType: string
+		lineageTag: 789011d0-2486-46a4-a122-9e31be84c5a0
+		summarizeBy: none
+		sourceColumn: unit
+
+	column item_group
+		dataType: string
+		lineageTag: 6b241d58-d2d6-4e02-b181-cfc1d76b3dca
+		summarizeBy: none
+		sourceColumn: item_group
+
+	column item_category
+		dataType: string
+		lineageTag: 4927bcca-8ce6-40ad-8a0a-9500a347bbc4
+		summarizeBy: none
+		sourceColumn: item_category
+
+	partition dim_item = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(ProcessedFolder & "\dim_item.parquet")),
+				    #"Selected" = Table.SelectColumns(Source, {"item_code", "item", "unit", "item_group", "item_category"}),
+				    #"Typed" = Table.TransformColumnTypes(#"Selected", {
+				        {"item_code", Int64.Type},
+				        {"item", type text},
+				        {"unit", type text},
+				        {"item_group", type text},
+				        {"item_category", type text}
+				    })
+				in
+				    #"Typed"
+
