@@ -1,0 +1,21 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["ProcessedFolder", "dim_month", "dim_item", "dim_premise", "fact_price_monthly"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_month
+ref table dim_item
+ref table dim_premise
+ref table fact_price_monthly
+
+ref cultureInfo en-US
+

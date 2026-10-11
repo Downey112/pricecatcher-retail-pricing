@@ -1,0 +1,67 @@
+table dim_premise
+	lineageTag: 67ae130a-9f01-4a9e-abf7-209179afd1c4
+
+	column premise_code
+		dataType: int64
+		isKey
+		isHidden
+		lineageTag: c20d6ec9-52e3-426c-8f81-0d7305bb5306
+		summarizeBy: none
+		sourceColumn: premise_code
+
+	column premise
+		dataType: string
+		lineageTag: 41feabf9-23f4-42d6-832b-b0dc59a6467b
+		summarizeBy: none
+		sourceColumn: premise
+
+	column store_format
+		dataType: string
+		lineageTag: 3b4208ea-1c07-4602-a30c-78b620958976
+		summarizeBy: none
+		sourceColumn: store_format
+		sortByColumn: store_format_order
+
+	column store_format_order
+		dataType: int64
+		isHidden
+		lineageTag: 7b5f86b6-a6ce-4106-b125-e32200742a28
+		summarizeBy: none
+		sourceColumn: store_format_order
+
+	column state
+		dataType: string
+		lineageTag: bdbf3c84-6d0b-4be3-98e5-714395bbd3f5
+		summarizeBy: none
+		sourceColumn: state
+
+	column region
+		dataType: string
+		lineageTag: 7c5db755-e6b2-4d86-8941-3e4b001623b2
+		summarizeBy: none
+		sourceColumn: region
+
+	column district
+		dataType: string
+		lineageTag: c84aceb9-0dab-42c3-8f91-5c47fe43ab61
+		summarizeBy: none
+		sourceColumn: district
+
+	partition dim_premise = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(ProcessedFolder & "\dim_premise.parquet")),
+				    #"Selected" = Table.SelectColumns(Source, {"premise_code", "premise", "store_format", "store_format_order", "state", "region", "district"}),
+				    #"Typed" = Table.TransformColumnTypes(#"Selected", {
+				        {"premise_code", Int64.Type},
+				        {"premise", type text},
+				        {"store_format", type text},
+				        {"store_format_order", Int64.Type},
+				        {"state", type text},
+				        {"region", type text},
+				        {"district", type text}
+				    })
+				in
+				    #"Typed"
+

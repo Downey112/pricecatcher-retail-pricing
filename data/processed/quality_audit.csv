@@ -1,0 +1,7 @@
+step,measure,row_count
+1,Daily price rows downloaded,20687140
+2,Removed: item code missing from the item lookup,306987
+3,Removed: keying errors (beyond 3x the monthly median for the item),40664
+4,"Removed: wholesale premises, not a retail format",369
+5,Daily rows kept,20339120
+6,Shop-item-month rows in fact_price_monthly,2844896

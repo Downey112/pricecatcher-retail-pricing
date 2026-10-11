@@ -1,0 +1,36 @@
+store_format,store_format_order,item_group,shops,observations,price_index,premium_pct
+Hypermarket,1,Fresh food,155,94566,93.54,-6.46
+Supermarket,2,Household & personal care,719,135552,100.0,0.0
+Mini market,3,Household & personal care,671,45541,99.32,-0.68
+Wet market,5,Dry goods,312,28841,117.83,17.83
+Hypermarket,1,Beverages,153,35151,97.49,-2.51
+Supermarket,2,Packaged food,721,486996,99.8,-0.2
+Mini market,3,Packaged food,693,260101,99.89,-0.11
+Sundry shop,4,Baby products,293,27959,103.82,3.82
+Wet market,5,All items,313,251926,105.01,5.01
+Hypermarket,1,Packaged food,153,123643,98.04,-1.96
+Supermarket,2,Beverages,722,138381,100.33,0.33
+Mini market,3,Beverages,678,40158,99.74,-0.26
+Wet market,5,Baby products,5,222,103.97,3.97
+Supermarket,2,Dry goods,724,79179,92.2,-7.8
+Mini market,3,Dry goods,674,44456,102.91,2.91
+Sundry shop,4,Fresh food,359,60804,108.43,8.43
+Wet market,5,Household & personal care,129,1882,103.77,3.77
+Hypermarket,1,Household & personal care,153,34504,98.18,-1.82
+Supermarket,2,Fresh food,724,393128,96.95,-3.05
+Mini market,3,Fresh food,685,163132,104.6,4.6
+Sundry shop,4,Dry goods,359,23996,111.63,11.63
+Mini market,3,All items,693,638460,101.16,1.16
+Wet market,5,Fresh food,313,173976,103.65,3.65
+Sundry shop,4,Household & personal care,357,16802,105.32,5.32
+Hypermarket,1,Dry goods,154,18077,88.44,-11.56
+Supermarket,2,Baby products,704,124476,100.06,0.06
+Mini market,3,Baby products,633,85072,99.39,-0.61
+Sundry shop,4,Packaged food,372,112268,102.25,2.25
+Wet market,5,Beverages,142,3194,100.86,0.86
+Supermarket,2,All items,725,1357712,98.61,-1.39
+Hypermarket,1,All items,155,339037,96.2,-3.8
+Sundry shop,4,All items,372,257761,104.96,4.96
+Hypermarket,1,Baby products,154,33096,98.15,-1.85
+Wet market,5,Packaged food,255,43811,102.86,2.86
+Sundry shop,4,Beverages,360,15932,103.27,3.27
