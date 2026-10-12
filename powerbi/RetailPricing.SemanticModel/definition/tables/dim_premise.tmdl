@@ -3,8 +3,8 @@ table dim_premise
 
 	column premise_code
 		dataType: int64
-		isKey
 		isHidden
+		isKey
 		lineageTag: c20d6ec9-52e3-426c-8f81-0d7305bb5306
 		summarizeBy: none
 		sourceColumn: premise_code

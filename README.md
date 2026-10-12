@@ -12,7 +12,7 @@ SQL, and uses it for the kind of work a retail pricing team does: benchmarking s
 like for like, measuring price spread by item, costing a fixed basket, and finding out who
 actually changes their prices.
 
-Built with **SQL (DuckDB)**, **Power BI (star schema, 33 DAX measures)** and **Python
+Built with **SQL (DuckDB)**, **Power BI (star schema, 34 DAX measures)** and **Python
 (statsmodels)** for the fixed-effects model.
 
 ## What the data said
@@ -124,8 +124,8 @@ parameters**.
 
 - **Three tiers on one page:** five KPI tiles, then the format and state comparisons with
   the monthly index, then the item table for detail. Every visual sits on one five-column
-  grid with 24 px margins and 16 px gaps, and carries alt text.
-- **33 DAX measures** in display folders: base counts, benchmark (index, premium, P90/P10
+  grid with 24 px margins and 8 px gaps, and carries alt text.
+- **34 DAX measures** in display folders: base counts, benchmark (index, premium, P90/P10
   spread), repricing, format ranking, card text and dynamic titles.
 - **Slicers** for item group and state. The benchmark stays national when a state is
   selected, so the bars read as "this state against the country".

@@ -3,8 +3,8 @@ table dim_item
 
 	column item_code
 		dataType: int64
-		isKey
 		isHidden
+		isKey
 		lineageTag: 0eda8b33-c3ec-4541-861d-e9e9ad36e3f7
 		summarizeBy: none
 		sourceColumn: item_code

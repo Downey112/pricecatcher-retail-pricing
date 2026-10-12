@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "trend",
   "position": {
-    "x": 273.6,
-    "y": 212,
+    "x": 272,
+    "y": 200,
     "z": 19000,
-    "height": 176,
-    "width": 483.2,
+    "height": 204,
+    "width": 488,
     "tabOrder": 19000
   },
   "visual": {
@@ -102,7 +102,27 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Line chart of the monthly price index for each of five store formats, where 100 is the typical shop price for the same item in the same month.'"
+                  "Value": "'Line chart of the monthly price index for each of five store formats, coloured from blue for the cheapest format to dark grey for the dearest, where 100 is the typical shop price for the same item in the same month. September 2026 is a partial month.'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'By store format, 100 = typical shop  ·  Sep 2026 is partial, to 24 Sep'"
                 }
               }
             }
@@ -110,6 +130,215 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#2A78D6'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_premise"
+                          }
+                        },
+                        "Property": "store_format"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Hypermarket'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#93C5FD'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_premise"
+                          }
+                        },
+                        "Property": "store_format"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Supermarket'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#94A3B8'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_premise"
+                          }
+                        },
+                        "Property": "store_format"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Mini market'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#64748B'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_premise"
+                          }
+                        },
+                        "Property": "store_format"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Sundry shop'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0F172A'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "scopeId": {
+                  "Comparison": {
+                    "ComparisonKind": 0,
+                    "Left": {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Entity": "dim_premise"
+                          }
+                        },
+                        "Property": "store_format"
+                      }
+                    },
+                    "Right": {
+                      "Literal": {
+                        "Value": "'Wet market'"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
   }
 }

@@ -1,12 +1,12 @@
 table fact_price_monthly
 	lineageTag: c7723169-0d5c-4655-8694-abbafe922b6d
 
-	measure 'Shops' = DISTINCTCOUNT(fact_price_monthly[premise_code])
+	measure Shops = DISTINCTCOUNT(fact_price_monthly[premise_code])
 		formatString: #,0
 		displayFolder: Base
 		lineageTag: e1baeb2d-5bb2-47e9-8f6e-494afb7d8477
 
-	measure 'Items' = DISTINCTCOUNT(fact_price_monthly[item_code])
+	measure Items = DISTINCTCOUNT(fact_price_monthly[item_code])
 		formatString: #,0
 		displayFolder: Base
 		lineageTag: 525f3a8b-1e2d-4d17-a0e8-28d534023b19
@@ -145,7 +145,21 @@ table fact_price_monthly
 		displayFolder: Cards
 		lineageTag: 090a5e40-32d2-4d16-8f5d-001cb04729cf
 
-	measure 'Label Spread' = "dear vs cheap shop, same item"
+	measure 'Label Spread' =
+			-- The spread compared across item groups; falls back to the definition when one group is selected
+			VAR Groups =
+			    FILTER(
+			        ADDCOLUMNS(VALUES(dim_item[item_group]), "@Spread", [Price Spread %]),
+			        NOT ISBLANK([@Spread])
+			    )
+			VAR Low = MINX(Groups, [@Spread])
+			VAR High = MAXX(Groups, [@Spread])
+			RETURN
+			    IF(
+			        COUNTROWS(Groups) > 1,
+			        FORMAT(Low, "0%") & " to " & FORMAT(High, "0%") & " across item groups",
+			        "dear vs cheap shop, same item"
+			    )
 		displayFolder: Cards
 		lineageTag: 34dad26a-b75d-4db7-86b8-b5bb10900c61
 
@@ -153,7 +167,23 @@ table fact_price_monthly
 		displayFolder: Cards
 		lineageTag: b39b0879-ad70-4c54-ad13-009a93ffb464
 
-	measure 'Label Repriced' = "of prices moved month to month"
+	measure 'Label Repriced' =
+			-- The repricing rate compared across store formats, least to most active
+			VAR Formats =
+			    FILTER(
+			        ADDCOLUMNS(VALUES(dim_premise[store_format]), "@Repriced", [Repriced %]),
+			        NOT ISBLANK([@Repriced])
+			    )
+			VAR Low = MINX(Formats, [@Repriced])
+			VAR High = MAXX(Formats, [@Repriced])
+			VAR LowFormat = MINX(TOPN(1, Formats, [@Repriced], ASC), dim_premise[store_format])
+			VAR HighFormat = MAXX(TOPN(1, Formats, [@Repriced], DESC), dim_premise[store_format])
+			RETURN
+			    IF(
+			        COUNTROWS(Formats) > 1,
+			        FORMAT(Low, "0%") & " " & LOWER(LowFormat) & " to " & FORMAT(High, "0%") & " " & LOWER(HighFormat),
+			        "of prices moved month to month"
+			    )
 		displayFolder: Cards
 		lineageTag: 309e91ce-2005-472c-91db-0eeaba484ba7
 
@@ -202,7 +232,7 @@ table fact_price_monthly
 		displayFolder: Titles
 		lineageTag: 03c0f475-ec6a-4dfc-a82f-3c6160eda7e1
 
-	measure 'Title Spread' = "Price spread"
+	measure 'Title Spread' = "Spread: dear vs cheap shop"
 		displayFolder: Titles
 		lineageTag: 55619461-65d7-42df-842e-53e480b5932d
 
@@ -210,7 +240,7 @@ table fact_price_monthly
 		displayFolder: Titles
 		lineageTag: 77d53a0c-4425-4b4d-aa29-08eb6a140fe0
 
-	measure 'Title Trend' = "Price index, 100 = typical shop  ·  " & [Selection Label]
+	measure 'Title Trend' = "Price index  ·  " & [Selection Label]
 		displayFolder: Titles
 		lineageTag: 8881527f-3ca2-4852-a0e6-009935588eba
 
