@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "header",
   "position": {
-    "x": 24.0,
+    "x": 24,
     "y": 24,
     "z": 1000,
     "height": 56,
-    "width": 732.8,
+    "width": 736,
     "tabOrder": 1000
   },
   "visual": {
@@ -31,7 +31,7 @@
               {
                 "textRuns": [
                   {
-                    "value": "Same item, same month: how far is each shop from the typical price?  ·  Source: KPDN PriceCatcher, Oct 2025 to Sep 2026",
+                    "value": "Same item, same month: how far is each shop from the typical price?  ·  Source: KPDN PriceCatcher, 1 Oct 2025 to 24 Sep 2026",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
                       "fontSize": "9pt",

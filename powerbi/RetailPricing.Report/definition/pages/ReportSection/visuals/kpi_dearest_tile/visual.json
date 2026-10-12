@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "kpi_dearest_tile",
   "position": {
-    "x": 523.2,
-    "y": 96,
+    "x": 520,
+    "y": 88,
     "z": 10000,
-    "height": 100,
-    "width": 233.6,
+    "height": 104,
+    "width": 240,
     "tabOrder": 10000
   },
   "visual": {

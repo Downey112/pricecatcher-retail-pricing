@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "kpi_spread_tile",
   "position": {
-    "x": 772.8,
-    "y": 96,
+    "x": 768,
+    "y": 88,
     "z": 13000,
-    "height": 100,
-    "width": 233.6,
+    "height": 104,
+    "width": 240,
     "tabOrder": 13000
   },
   "visual": {
